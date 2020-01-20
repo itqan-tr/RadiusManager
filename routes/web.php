@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     /* For Users */
     Route::get('users/resetall', 'UserController@resetAll')->named('user.resetall');
     Route::delete('users/{user_id}/reset', 'UserController@macDestroy')->named('user.reset');
+    Route::delete('users/{user_id}/reset_pwd', 'UserController@resetPassword')->named('user.reset_pwd');
     Route::get('users/getDataTable', 'UserController@getDataTable');
     Route::resource('users', 'UserController');
 

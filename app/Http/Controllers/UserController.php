@@ -172,6 +172,14 @@ class UserController extends Controller
         return response('Success');
     }
 
+    public function resetPassword(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->password = $user->default_password;
+        $user->save();
+        return response('Success');
+    }
+
     public function resetAll(Request $request)
     {
         $users = User::all();
@@ -203,13 +211,16 @@ class UserController extends Controller
             ->addColumn('reset', function ($user) {
                 return '<button type="button" class="reset btn btn-sm btn-warning" data-user-id="' . $user->id . '" data-token="' . csrf_token() . '">Reset Mac Address</button>';
             })
+            ->addColumn('reset_pwd', function ($user) {
+                return '<button type="button" class="reset_pwd btn btn-sm btn-warning" data-user-id="' . $user->id . '" data-token="' . csrf_token() . '">Reset Password</button>';
+            })
             ->addColumn('edit', function ($user) {
                 return '<button type="button" class="edit btn btn-sm btn-primary" data-email="' . $user->email . '" data-apartment-id="' . $user->apartment_id . '" data-name="' . $user->name . '" data-username="' . $user->username . '" data-id="' . $user->id . '">Edit</button>';
             })
             ->addColumn('delete', function ($user) {
                 return '<button type="button" class="delete btn btn-sm btn-danger" data-delete-id="' . $user->id . '" data-token="' . csrf_token() . '" >Delete</button>';
             })
-            ->rawColumns(['status', 'action', 'reset', 'edit', 'delete'])
+            ->rawColumns(['status', 'action', 'reset', 'reset_pwd', 'edit', 'delete'])
             ->make(true);
     }
 }

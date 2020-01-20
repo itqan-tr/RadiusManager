@@ -44,6 +44,7 @@
                                     <th>Status</th>
                                     <th>Action</th>
                                     <th>Reset</th>
+                                    <th>Reset</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -326,7 +327,59 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Your Record is deleted.", "success");
+                                    swal("Deleted!", "Non-Permanent Mac Addresses deleted.", "success");
+                                    mytable.draw();
+                                },
+                                error: function (request, status, error) {
+                                    var val = request.responseText;
+                                    alert("error" + val);
+                                }
+                            });
+                    } else {
+                        swal("Cancelled", "Your record is safe", "error");
+                    }
+                });
+        });
+
+        $(document).on('click', '.reset_pwd', function () {
+
+            var user_id = $(this).data("user-id");
+            var token = $(this).data("token");
+
+            swal({
+                title: "Are you sure?",
+                text: "It will reset the user's password to default password!",
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "No, cancel it!",
+                        value: null,
+                        visible: true,
+                        className: "",
+                        closeModal: false,
+                    },
+                    confirm: {
+                        text: "Yes, delete it!",
+                        value: true,
+                        visible: true,
+                        className: "",
+                        closeModal: false
+                    }
+                }
+            })
+                .then((isConfirm) => {
+                    if (isConfirm) {
+                        $.ajax(
+                            {
+                                url: "users/" + user_id + "/reset_pwd",
+                                type: 'POST',
+                                data: {
+                                    "user_id": user_id,
+                                    "_method": 'DELETE',
+                                    "_token": token
+                                },
+                                success: function (result) {
+                                    swal("Success!", "Password reset successful. ", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {
@@ -436,6 +489,7 @@
                     {data: "status", searchable: false, sortable: false},
                     {data: "action", searchable: false, sortable: false},
                     {data: "reset", searchable: false, sortable: false},
+                    {data: "reset_pwd", searchable: false, sortable: false},
                     {data: "edit", searchable: false, sortable: false},
                     {data: "delete", searchable: false, sortable: false}
                 ]
