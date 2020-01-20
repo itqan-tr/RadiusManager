@@ -111,3 +111,11 @@ php artisan nginx:install
 # Restart NGINX to Apply Config
 
 service nginx restart
+
+# Radius Clean up script
+
+php artisan radius:cleanup
+
+Setup Laravel cron to run every min this will run Radius Cleanup daily midnight and this will clean the logs older then 90 days. 
+`* * * * * nginx php /var/www/html/RadiusManager/artisan schedule:run`
+
