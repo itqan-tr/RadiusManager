@@ -9,6 +9,7 @@
                 @if(Auth::user()->role == 'Administrator')
                     <li class=" nav-item"><a href="/apartments"><i class="la la-bank"></i><span class="menu-title">Apartments</span></a></li>
                     <li class=" nav-item"><a href="/nas"><i class="la la-inbox"></i><span class="menu-title">NAS</span></a></li>
+                    <li class=" nav-item"><a href="/psk"><i class="la la-key"></i><span class="menu-title">PSK</span></a></li>
                     <li class=" nav-item"><a href="/administrators"><i class="la la-user"></i><span class="menu-title">Administrators</span></a></li>
                 @endif
             @endauth

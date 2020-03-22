@@ -106,7 +106,7 @@
 
         var mytable;
 
-        /* DELETE Record using AJAX Requres */
+        /* DELETE Mac Address using AJAX Requres */
         $(document).on('click', '.reset', function () {
 
             var token = $(this).data("token");
@@ -142,7 +142,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Your Record is deleted.", "success");
+                                    swal("Deleted!", "Your Mac Address is deleted.", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {
@@ -151,14 +151,14 @@
                                 }
                             });
                     } else {
-                        swal("Cancelled", "Your record is safe", "error");
+                        swal("Cancelled", "Your Mac Address is safe", "error");
                     }
                 });
         });
 
          $(document).ready(function (e) {
 
-             /* DELETE Record using AJAX Requres */
+             /* DELETE Mac Address using AJAX Requres */
              $(document).on('click', '.delete', function () {
 
                  var id = $(this).data("delete-id");
@@ -197,7 +197,7 @@
                                          "_token": token
                                      },
                                      success: function (result) {
-                                         swal("Deleted!", "Your Record is deleted.", "success");
+                                         swal("Deleted!", "Your Mac Address is deleted.", "success");
                                          mytable.draw();
                                      },
                                      error: function (request, status, error) {
@@ -206,7 +206,7 @@
                                      }
                                  });
                          } else {
-                             swal("Cancelled", "Your record is safe", "error");
+                             swal("Cancelled", "Your Mac Address is safe", "error");
                          }
                      });
              });
@@ -227,7 +227,7 @@
                 ]
             });
 
-            /* ADD Record using AJAX Requres */
+            /* ADD Mac Address using AJAX Requres */
             var addformValidator = $("#addform").validate({
                 ignore: ":hidden",
                 errorElement: "span",
@@ -249,7 +249,7 @@
                         data: $(form).serialize(),
                         success: function (data) {
                             $('#addmodel').modal('hide');
-                            swal("Good job!", "Your Record Inserted Successfully", "success");
+                            swal("Good job!", "Your Mac Address has been registered Successfully.\n Please connect to '{{Cache::get('psk_network_name')}}' using '{{ Cache::get('psk_password') }}' as the password.", "success");
                             $(form).trigger('reset');
                             mytable.draw();
                         },

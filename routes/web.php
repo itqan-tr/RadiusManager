@@ -12,9 +12,7 @@
 */
 Auth::routes();
 
-Route::get('/register', function () {
-    return redirect()->route('login');
-});
+Route::get('/register', 'Auth\LoginController@logout');
 
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -49,8 +47,12 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('users/getDataTable', 'UserController@getDataTable');
     Route::resource('users', 'UserController');
 
+    /* For Administrators */
     Route::get('administrators/getDataTable', 'AdministratorController@getDataTable');
     Route::resource('administrators', 'AdministratorController');
+
+    /* For PSK */
+    Route::resource('psk', 'PskController');
 
     /* For Mac Addresses */
     Route::post('adminmacaddress/reset', 'AdminMacAddressController@destroyAll');
