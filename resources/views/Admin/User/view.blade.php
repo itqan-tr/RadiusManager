@@ -243,7 +243,7 @@
 
             swal({
                 title: "Are you sure?",
-                text: "It will Delete this user!",
+                text: "It will delete this user!",
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -296,7 +296,7 @@
 
             swal({
                 title: "Are you sure?",
-                text: "It will Delete all Non-Permanent Mac Addresses!",
+                text: "It will Delete all Non-Permanent MAC Addresses!",
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -327,7 +327,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Non-Permanent Mac Addresses deleted.", "success");
+                                    swal("Deleted!", "Non-Permanent MAC Addresses deleted.", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {

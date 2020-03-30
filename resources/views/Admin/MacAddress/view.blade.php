@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title',"View MacAddress")
+@section('title',"View MACAddress")
 
 @section('head')
     <!-- BEGIN Page Level CSS-->
@@ -18,7 +18,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Mac Address</h4>
+                        <h4 class="card-title">MAC Address</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements" style="width: 200px;">
                             <button type="button" data-token="{{ csrf_token() }}" class="reset btn btn-danger block btn-lg pull-left" style="width: 90px">
@@ -37,7 +37,7 @@
                                 <thead>
                                 <tr>
                                     <th>User</th>
-                                    <th>Mac Address</th>
+                                    <th>MAC Address</th>
                                     <th width="50px">Permanent</th>
                                     <th>Delete</th>
                                 </tr>
@@ -57,7 +57,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel35"> Add MacAddress</h3>
+                    <h3 class="modal-title" id="myModalLabel35"> Add MACAddress</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -70,9 +70,9 @@
                             {!!Form::select('user_id', $users, null, ['id'=>'user_id', 'class' => 'form-control', 'required'=>'true'])!!}
                         </fieldset>
                         <fieldset class="form-group floating-label-form-group">
-                            <label for="adminmacaddress">Mac Address</label>
+                            <label for="adminmacaddress">MAC Address</label>
                             <input type="text" class="form-control" id="macaddress" name="macaddress"
-                                   placeholder="Enter Mac Address">
+                                   placeholder="Enter MAC Address">
                         </fieldset>
                         <fieldset class="form-group floating-label-form-group">
                             <label for="perminent">Permanent</label>
@@ -106,14 +106,14 @@
 
         var mytable;
 
-        /* DELETE Mac Address using AJAX Requres */
+        /* DELETE MAC Address using AJAX Requres */
         $(document).on('click', '.reset', function () {
 
             var token = $(this).data("token");
 
             swal({
                 title: "Are you sure?",
-                text: "It will Delete all Non-Permanent Mac Addresses!",
+                text: "It will Delete all Non-Permanent MAC Addresses!",
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -142,7 +142,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Your Mac Address is deleted.", "success");
+                                    swal("Deleted!", "Your MAC Address is deleted.", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {
@@ -151,14 +151,14 @@
                                 }
                             });
                     } else {
-                        swal("Cancelled", "Your Mac Address is safe", "error");
+                        swal("Cancelled", "Your MAC Address is safe", "error");
                     }
                 });
         });
 
          $(document).ready(function (e) {
 
-             /* DELETE Mac Address using AJAX Requres */
+             /* DELETE MAC Address using AJAX Requres */
              $(document).on('click', '.delete', function () {
 
                  var id = $(this).data("delete-id");
@@ -166,7 +166,7 @@
 
                  swal({
                      title: "Are you sure?",
-                     text: "It will Delete this Mac Address!",
+                     text: "It will delete this MAC Address!",
                      icon: "warning",
                      buttons: {
                          cancel: {
@@ -197,7 +197,7 @@
                                          "_token": token
                                      },
                                      success: function (result) {
-                                         swal("Deleted!", "Your Mac Address is deleted.", "success");
+                                         swal("Deleted!", "Your MAC Address is deleted.", "success");
                                          mytable.draw();
                                      },
                                      error: function (request, status, error) {
@@ -206,7 +206,7 @@
                                      }
                                  });
                          } else {
-                             swal("Cancelled", "Your Mac Address is safe", "error");
+                             swal("Cancelled", "Your MAC Address is safe", "error");
                          }
                      });
              });
@@ -227,7 +227,7 @@
                 ]
             });
 
-            /* ADD Mac Address using AJAX Requres */
+            /* ADD MAC Address using AJAX Requres */
             var addformValidator = $("#addform").validate({
                 ignore: ":hidden",
                 errorElement: "span",
@@ -249,7 +249,7 @@
                         data: $(form).serialize(),
                         success: function (data) {
                             $('#addmodel').modal('hide');
-                            swal("Good job!", "Your Mac Address has been registered Successfully.\n Please connect to '{{Cache::get('psk_network_name')}}' using '{{ Cache::get('psk_password') }}' as the password.", "success");
+                            swal("Good job!", "Your MAC address has be registered successfully.\n Please connect to '{{Cache::get('psk_network_name')}}' using '{{ Cache::get('psk_password') }}' as the password.", "success");
                             $(form).trigger('reset');
                             mytable.draw();
                         },

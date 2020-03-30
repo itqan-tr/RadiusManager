@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title',"View MacAddress")
+@section('title',"View MACAddress")
 
 @section('head')
     <!-- BEGIN Page Level CSS-->
@@ -34,7 +34,7 @@
                             <table class="table table-striped table-bordered dynamic-table" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Mac Address</th>
+                                    <th>MAC Address</th>
                                     <th>Delete</th>
                                 </tr>
                                 </thead>
@@ -62,9 +62,9 @@
                     @csrf
                     <div class="modal-body">
                         <fieldset class="form-group floating-label-form-group">
-                            <label for="macaddress">Mac Address</label>
+                            <label for="macaddress">MAC Address</label>
                             <input type="text" class="form-control" id="macaddress" name="macaddress"
-                                   placeholder="Enter Mac Address">
+                                   placeholder="Enter MAC Address">
                         </fieldset>
                     </div>
 
@@ -95,7 +95,7 @@
 
         var mytable;
 
-        /* DELETE Mac Address using AJAX Requres */
+        /* DELETE MAC Address using AJAX Requres */
         $(document).on('click', '.delete', function () {
 
             var id = $(this).data("delete-id");
@@ -134,7 +134,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Your Mac Address is deleted.", "success");
+                                    swal("Deleted!", "Your MAC Address is deleted.", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {
@@ -143,7 +143,7 @@
                                 }
                             });
                     } else {
-                        swal("Cancelled", "Your Mac Address is safe", "error");
+                        swal("Cancelled", "Your MAC Address is safe", "error");
                     }
                 });
         });
@@ -164,7 +164,7 @@
                 ]
             });
 
-            /* ADD Mac Address using AJAX Requres */
+            /* ADD MAC Address using AJAX Requres */
             var addformValidator = $("#addform").validate({
                 ignore: ":hidden",
                 errorElement: "span",
@@ -186,7 +186,7 @@
                         data: $(form).serialize(),
                         success: function (data) {
                             $('#addmodel').modal('hide');
-                            swal("Good job!", "Your Mac Address has been registered Successfully.\n Please connect to '{{Cache::get('psk_network_name')}}' using '{{ Cache::get('psk_password') }}' as the password.", "success");
+                            swal("Good job!", "Your MAC address has be registered successfully.\n Please connect to '{{Cache::get('psk_network_name')}}' using '{{ Cache::get('psk_password') }}' as the password.", "success");
                             $(form).trigger('reset');
                             mytable.draw();
                         },

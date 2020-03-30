@@ -42,6 +42,8 @@ class AdminMacAddressController extends Controller
         $request->validate([
             'user_id' => 'required',
             'macaddress' => 'required|string|unique:mac_addresses|regex:/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/',
+        ], [
+            'macaddress.regex' => 'The MAC address format is invalid.'
         ]);
 
         MacAddress::create($request->all());
