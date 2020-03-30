@@ -158,6 +158,10 @@
 
          $(document).ready(function (e) {
 
+             $('#addmodel').on('hidden.bs.modal', function (e) {
+                 $('#addform').trigger('reset');
+             });
+
              /* DELETE MAC Address using AJAX Requres */
              $(document).on('click', '.delete', function () {
 
