@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title',"View MACAddress")
+@section('title',"View MAC Address")
 
 @section('head')
     <!-- BEGIN Page Level CSS-->

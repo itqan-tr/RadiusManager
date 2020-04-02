@@ -193,7 +193,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Your Record is deleted.", "success");
+                                    swal("Deleted!", "The record is deleted.", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {
@@ -246,7 +246,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Your Record is deleted.", "success");
+                                    swal("Deleted!", "The record is deleted.", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {

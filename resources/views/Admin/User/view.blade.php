@@ -274,7 +274,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Your Record is deleted.", "success");
+                                    swal("Deleted!", "The record is deleted.", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {
@@ -296,7 +296,7 @@
 
             swal({
                 title: "Are you sure?",
-                text: "It will Delete all Non-Permanent MAC Addresses!",
+                text: "All non-permanent MAC addresses will be deleted.!",
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -327,7 +327,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Non-Permanent MAC Addresses deleted.", "success");
+                                    swal("Deleted!", "Non-permanent MAC addresses deleted..", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {
@@ -441,7 +441,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Updated!", "Your Record is updated.", "success");
+                                    swal("Updated!", "The record is updated.", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {
