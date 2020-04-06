@@ -283,7 +283,7 @@
                                 }
                             });
                     } else {
-                        swal("Cancelled", "Your record is safe", "error");
+                        swal("Cancelled", "The record is safe", "error");
                     }
                 });
         });
@@ -296,7 +296,7 @@
 
             swal({
                 title: "Are you sure?",
-                text: "All non-permanent MAC addresses will be deleted.!",
+                text: "All non-permanent MAC addresses will be deleted.",
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -327,7 +327,7 @@
                                     "_token": token
                                 },
                                 success: function (result) {
-                                    swal("Deleted!", "Non-permanent MAC addresses deleted..", "success");
+                                    swal("Deleted!", "Non-permanent MAC addresses deleted.", "success");
                                     mytable.draw();
                                 },
                                 error: function (request, status, error) {
@@ -336,7 +336,7 @@
                                 }
                             });
                     } else {
-                        swal("Cancelled", "Your record is safe", "error");
+                        swal("Cancelled", "The record is safe", "error");
                     }
                 });
         });
@@ -388,7 +388,7 @@
                                 }
                             });
                     } else {
-                        swal("Cancelled", "Your record is safe", "error");
+                        swal("Cancelled", "The record is safe", "error");
                     }
                 });
         });

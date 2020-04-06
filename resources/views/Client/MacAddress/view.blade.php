@@ -109,7 +109,7 @@
 
             swal({
                 title: "Are you sure?",
-                text: "It will Delete Perminatly !",
+                text: "It will delete permanently.",
                 icon: "warning",
                 buttons: {
                     cancel: {

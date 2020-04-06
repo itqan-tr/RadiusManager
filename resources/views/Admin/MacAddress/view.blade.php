@@ -113,7 +113,7 @@
 
             swal({
                 title: "Are you sure?",
-                text: "All non-permanent MAC addresses will be deleted.!",
+                text: "All non-permanent MAC addresses will be deleted.",
                 icon: "warning",
                 buttons: {
                     cancel: {

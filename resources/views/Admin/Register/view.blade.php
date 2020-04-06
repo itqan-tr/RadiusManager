@@ -202,7 +202,7 @@
                                 }
                             });
                     } else {
-                        swal("Cancelled", "Your record is safe", "error");
+                        swal("Cancelled", "The record is safe", "error");
                     }
                 });
         });
@@ -215,7 +215,7 @@
 
             swal({
                 title: "Are you sure?",
-                text: "It will Delete Perminatly !",
+                text: "It will delete permanently.",
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -255,7 +255,7 @@
                                 }
                             });
                     } else {
-                        swal("Cancelled", "Your record is safe", "error");
+                        swal("Cancelled", "The record is safe", "error");
                     }
                 });
         });
