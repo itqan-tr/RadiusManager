@@ -108,6 +108,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'disable_user_password_change' => env('DISABLE_USER_PASSWORD_CHANGE', false),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
