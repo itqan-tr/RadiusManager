@@ -16,6 +16,9 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::User();
+        if (config('app.disable_user_password_change')) {
+            return redirect()->back();
+        }
         return view('Profile.view', compact('user'));
     }
 

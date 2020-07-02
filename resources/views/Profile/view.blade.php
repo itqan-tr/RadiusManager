@@ -39,7 +39,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-2 label-control" for="password">Password</label>
                                     <div class="col-md-10">
-                                        {!! Form::text('password',null,['class'=>'form-control','required'=>'true','data-minlenght' => 6, 'disabled' => config('disable_user_password_change', false)]) !!}
+                                        {!! Form::text('password',null,['class'=>'form-control','required'=>'true','data-minlenght' => 6]) !!}
                                     </div>
                                 </div>
                             </div>

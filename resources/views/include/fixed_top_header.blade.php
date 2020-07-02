@@ -57,10 +57,12 @@
                                 <span class="avatar avatar-online">
                   <img src="{{asset('dist/app-assets/images/portrait/small/avtar.png')}}" alt="avatar"><i></i></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
-                                                                              href="/profile"><i
-                                            class="ft-user"></i> Edit Profile</a>
-                                <div class="dropdown-divider"></div>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                @if(!config('app.disable_user_password_change'))
+                                    <a class="dropdown-item" href="/profile">
+                                        <i class="ft-user"></i> Edit Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                @endif
                                 <a class="dropdown-item" href="{{ url('/logout') }}"><i class="ft-power"></i>
                                     Logout</a>
                             </div>
