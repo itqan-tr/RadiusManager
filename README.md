@@ -68,6 +68,10 @@ ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/sq
 
 ln -s /etc/freeradius/3.0/sites-available/dynamic-clients /etc/freeradius/3.0/sites-enabled/dynamic-clients
 
+sh /etc/freeradius/3.0/certs/bootstrap
+
+chown -R freerad:freerad /etc/freeradius/3.0/certs
+
 # Create MySQL Database and User for Application
 
 mysql -uroot -p
@@ -99,6 +103,8 @@ php artisan migrate
 php artisan db:seed
 
 php artisan radius:install
+
+service freeradius start
 
 # Set NGINX to point to Application
 
