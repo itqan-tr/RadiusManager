@@ -47,6 +47,7 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 # Install MySQL Server
 
 apt-get install mysql-server
+
 /etc/init.d/mysql start
 mysql_secure_installation
 
