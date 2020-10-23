@@ -8,7 +8,7 @@ Mitul Gadhiya | Prakash Gujarati
 
 The  purpose  of  this  project  is  to  provide  an  Administration  and  End  User  GUI  interface  for  FreeRadius  entries  into  the  MySQL  Database.
 
-## Installation for UBUNTU 16.04.XX
+## Installation for UBUNTU 18.04.XX
 
 # Login as ROOT
 
@@ -27,8 +27,6 @@ sudo apt-get --purge autoremove
 # PHP 7 (Needed for Laravel 5.7)
 
 apt-get install -y software-properties-common
-
-apt-get install -y python-software-properties
 
 add-apt-repository -y ppa:ondrej/php
 
@@ -50,15 +48,14 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 
 apt-get install mysql-server
 
+/etc/init.d/mysql start
+mysql_secure_installation
+
 # Install NGINX Server
 
 apt-get install nginx
 
 # Install FreeRadius 3.0
-
-apt-add-repository -y ppa:freeradius/stable-3.0
-
-apt-get update
 
 apt-get install -y freeradius
 
@@ -68,9 +65,13 @@ apt-get install -y freeradius-mysql
 
 service freeradius stop
 
-ln -s /etc/freeradius/mods-available/sql /etc/freeradius/mods-enabled/sql
+ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/sql
 
-ln -s /etc/freeradius/sites-available/dynamic-clients /etc/freeradius/sites-enabled/dynamic-clients
+ln -s /etc/freeradius/3.0/sites-available/dynamic-clients /etc/freeradius/3.0/sites-enabled/dynamic-clients
+
+sh /etc/freeradius/3.0/certs/bootstrap
+
+chown -R freerad:freerad /etc/freeradius/3.0/certs
 
 # Create MySQL Database and User for Application
 
@@ -103,6 +104,8 @@ php artisan migrate
 php artisan db:seed
 
 php artisan radius:install
+
+service freeradius start
 
 # Set NGINX to point to Application
 
