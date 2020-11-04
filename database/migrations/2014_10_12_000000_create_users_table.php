@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
@@ -19,9 +19,12 @@ class CreateUsersTable extends Migration
             $table->boolean('is_enabled')->default(true);
             $table->string('name');
             $table->string('email')->nullable();
-            $table->string('username', 20)->unique();
+            $table->string('username')->unique();
             $table->string('password');
             $table->string('default_password');
+            $table->string('lease_id')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

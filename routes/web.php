@@ -75,3 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 });
+
+Route::get('test', function () {
+    dd(App\Entrata\Customers::getCustomers(0)[0]);
+});

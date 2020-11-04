@@ -39,6 +39,7 @@ class ApartmentController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'vlan_id' => 'required|string',
+            'unit_number' => 'string',
         ]);
 
         Apartment::create($request->all());
@@ -80,6 +81,7 @@ class ApartmentController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'vlan_id' => 'required|string',
+            'unit_number' => 'string',
         ]);
 
         $apartment = Apartment::findOrFail($id);
@@ -104,7 +106,7 @@ class ApartmentController extends Controller
 
         return DataTables::of($apartments)
             ->addColumn('edit', function ($apartment) {
-                return '<button type="button" class="edit btn btn-sm btn-primary" data-name="' . $apartment->name . '" data-vlan-id="' . $apartment->vlan_id . '" data-id="' . $apartment->id . '">Edit</button>';
+                return '<button type="button" class="edit btn btn-sm btn-primary" data-name="' . $apartment->name . '" data-vlan-id="' . $apartment->vlan_id . '" data-unit-number="' . $apartment->unit_number . '" data-id="' . $apartment->id . '">Edit</button>';
             })
             ->addColumn('delete', function ($apartment) {
                 return '<button type="button" class="delete btn btn-sm btn-danger" data-delete-id="' . $apartment->id . '" data-token="' . csrf_token() . '" >Delete</button>';

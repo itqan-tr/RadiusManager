@@ -35,7 +35,8 @@
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Vlan_id</th>
+                                    <th>VLan-Id</th>
+                                    <th>Unit Number</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -69,9 +70,14 @@
                                    placeholder="Enter Name">
                         </fieldset>
                         <fieldset class="form-group floating-label-form-group">
-                            <label for="description">Vlan_id</label>
+                            <label for="description">VLan-Id</label>
                             <input type="text" class="form-control" required="true" id="vlan_id" name="vlan_id"
-                                   placeholder="Enter Vlan Id">
+                                   placeholder="Enter Vlan-Id">
+                        </fieldset>
+                        <fieldset class="form-group floating-label-form-group">
+                            <label for="description">Unit Number</label>
+                            <input type="text" class="form-control" id="unit_number" name="unit_number"
+                                   placeholder="Enter Unit Number">
                         </fieldset>
                     </div>
                     <div class="modal-footer">
@@ -103,9 +109,14 @@
                                    placeholder="Enter Name">
                         </fieldset>
                         <fieldset class="form-group floating-label-form-group">
-                            <label for="description">Vlan_id</label>
+                            <label for="description">VLan-Id</label>
                             <input type="text" class="form-control" required="true" id="vlan_id" name="vlan_id"
-                                   placeholder="Enter Vlan Id">
+                                   placeholder="Enter Vlan-Id">
+                        </fieldset>
+                        <fieldset class="form-group floating-label-form-group">
+                            <label for="description">Unit Number</label>
+                            <input type="text" class="form-control" id="unit_number" name="unit_number"
+                                   placeholder="Enter Unit Number">
                         </fieldset>
                     </div>
                     <div class="modal-footer">
@@ -193,9 +204,11 @@
             var id = $(this).data("id");
             var name = $(this).data("name");
             var vlan_id = $(this).data("vlan-id");
+            var unit_number = $(this).data("unit-number");
 
             $('#editform #name').val(name);
             $('#editform #vlan_id').val(vlan_id);
+            $('#editform #unit_number').val(unit_number);
             $('#editform').attr('action', 'apartments/' + id);
             $('#editmodel').modal('show');
         });
@@ -206,10 +219,10 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ url('apartments/getDataTable') }}",
-
                 columns: [
                     {data: "name"},
                     {data: "vlan_id"},
+                    {data: "unit_number"},
                     {data: "edit"},
                     {data: "delete"}
                 ]

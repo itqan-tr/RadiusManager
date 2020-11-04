@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Apartment;
 use App\MacAddress;
 use App\User;
-use App\Apartment;
 use DataTables;
 use Illuminate\Http\Request;
-use function foo\func;
 
 class UserController extends Controller
 {
@@ -45,7 +44,7 @@ class UserController extends Controller
             'apartment_id' => 'required',
             'name' => 'required|string|max:255',
             'email' => 'required|email|string|max:255',
-            'username' => 'required|string|max:20|unique:users',
+            'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|max:255',
         ]);
 
@@ -111,7 +110,7 @@ class UserController extends Controller
                 'apartment_id' => 'required',
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|string|max:255',
-                'username' => 'required|string|max:20',
+                'username' => 'required|string|max:255',
             ]);
         }
 

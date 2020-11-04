@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\EntrataGetCustomers;
 use App\Console\Commands\PostInstallNginx;
 use App\Console\Commands\PostInstallRadius;
 use App\Console\Commands\RadiusCleanUp;
@@ -19,6 +20,7 @@ class Kernel extends ConsoleKernel
         PostInstallRadius::class,
         PostInstallNginx::class,
         RadiusCleanUp::class,
+        EntrataGetCustomers::class,
     ];
 
     /**
