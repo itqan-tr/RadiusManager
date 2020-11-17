@@ -21,7 +21,7 @@ class EntrataGetCustomers extends Command
      *
      * @var string
      */
-    protected $description = 'Get Entrata Customers';
+    protected $description = 'Retrieves list of customers for a property.';
 
     /**
      * Create a new command instance.
@@ -65,6 +65,7 @@ class EntrataGetCustomers extends Command
                 $apartment_id = $apartment->id;
                 if ($user = User::where('email', '=', $customer['Email'])->first()) {
                     $user->lease_id = $lease_id;
+                    $user->apartment_id = $apartment_id;
                     $user->save();
                 } else {
                     $user = new User();

@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\EntrataGetCustomers;
+use App\Console\Commands\EntrataGetMistLeases;
 use App\Console\Commands\PostInstallNginx;
 use App\Console\Commands\PostInstallRadius;
 use App\Console\Commands\RadiusCleanUp;
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
         PostInstallNginx::class,
         RadiusCleanUp::class,
         EntrataGetCustomers::class,
+        EntrataGetMistLeases::class,
     ];
 
     /**
@@ -32,6 +34,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('radius:cleanup')->daily();
+        $schedule->command('entrata:getCustomers')->daily()->emailWrittenOutputTo(config('app.support.email'))
+            ->then(function () {
+                $this->call('entrata:getMitsLeases')->emailWrittenOutputTo(config('app.support.email'));
+            });
     }
 
     /**
