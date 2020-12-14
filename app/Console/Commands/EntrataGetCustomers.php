@@ -72,7 +72,7 @@ class EntrataGetCustomers extends Command
                     $user->apartment_id = $apartment_id;
                     $user->name = $customer['FirstName'] . ' ' . $customer['LastName'];
                     $user->username = $customer['Email'];
-                    $user->password = str_random(5);
+                    $user->password = str_random(6);
                     $user->is_enabled = false;
                     $user->default_password = $user->password;
                     $user->email = $customer['Email'];
