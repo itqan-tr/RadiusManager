@@ -8,7 +8,7 @@
     | {{$content['username']}} | {{$content['password']}} |
 @endcomponent
 
-If you did not request your password, no further action is required.
+If you did not request your password, please contact {{ config('app.support.email') }}
 
 Thanks, <br>
 {{ config('app.name') }}
