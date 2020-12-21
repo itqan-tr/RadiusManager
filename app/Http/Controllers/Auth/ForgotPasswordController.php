@@ -43,7 +43,7 @@ class ForgotPasswordController extends Controller
 
         if ($user) {
             $response = Password::RESET_LINK_SENT;
-//            \Mail::to($user)->send(new ForgotPassword($user));
+            \Mail::to($user)->send(new ForgotPassword($user));
             return back()->with('status', trans($response));
         } else {
             $response = Password::INVALID_USER;
