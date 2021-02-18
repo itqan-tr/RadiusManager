@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::resource('administrators', 'AdministratorController');
 
     /* For PSK */
+    Route::get('psk/download', 'PskController@download');
     Route::resource('psk', 'PskController');
 
     /* For Mac Addresses */
@@ -66,12 +67,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
-
-
     Route::get('macaddress/getDataTable', 'MacAddressController@getDataTable');
+    Route::get('macaddress/random', 'MacAddressController@random');
     Route::resource('macaddress', 'MacAddressController');
-
     Route::resource('profile', 'ProfileController');
-
-
 });

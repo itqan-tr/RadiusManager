@@ -87,4 +87,15 @@ class PskController extends Controller
     {
         //
     }
+
+    public function download()
+    {
+        $headers = [
+            'Content-type' => 'text/html',
+            'Content-Disposition' => 'attachment; filename="index.html"',
+        ];
+        $url = url('macaddress');
+        $view = view('Admin.Psk.download', compact('url'));
+        return response($view, 200, $headers);
+    }
 }

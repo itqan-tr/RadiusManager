@@ -14,9 +14,18 @@ class MacAddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('Client.MacAddress.view');
+        if ($request->has('client_mac')) {
+            $client_mac = $request->get('client_mac');
+            $re = '/[[:xdigit:]][a|A|e|E|2|6]:[[:xdigit:]]{2}:[[:xdigit:]]{2}:[[:xdigit:]]{2}:[[:xdigit:]]{2}:[[:xdigit:]]{2}/m';
+            if (preg_match($re, $client_mac)) {
+                return redirect('macaddress/random');
+            }
+        } else {
+            $client_mac = null;
+        }
+        return view('Client.MacAddress.view', compact('client_mac'));
     }
 
     /**
@@ -113,5 +122,10 @@ class MacAddressController extends Controller
             })
             ->rawColumns(['delete'])
             ->make(true);
+    }
+
+    public function random()
+    {
+        return view('Client.MacAddress.random');
     }
 }

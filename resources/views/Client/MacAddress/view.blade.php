@@ -25,7 +25,8 @@
                                 here !</a></h5>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
-                            <button type="button" class="btn btn-outline-warning block btn-lg" data-toggle="modal"
+                            <button type="button" class="btn btn-outline-warning block btn-lg" id="register"
+                                    data-toggle="modal"
                                     data-target="#addmodel">
                                 Register Device
                             </button>
@@ -96,7 +97,14 @@
     <script src="{{asset('dist/app-assets/js/scripts/inputmask/jquery.inputmask.bundle.js')}}"></script>
 
     <!-- END PAGE LEVEL JS-->
-
+    @if($client_mac)
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#macaddress").val('{{ $client_mac }}');
+                $('#register').click();
+            });
+        </script>
+    @endif
     <script>
 
         var mytable;
