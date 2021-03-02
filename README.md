@@ -87,7 +87,7 @@ exit
 
 cd /var/www/html
 
-git clone -b "master" https://github.com/PrakashGujarati/RadiusManager.git 
+git clone -b "Radius_CP" https://github.com/PrakashGujarati/RadiusManager.git 
 
 chown www-data:www-data -R RadiusManager
 
