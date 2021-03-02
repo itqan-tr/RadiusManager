@@ -41,6 +41,8 @@
                                     <th>Email</th>
                                     <th>Password</th>
                                     <th>Apartment</th>
+                                    <th>Max Download</th>
+                                    <th>Max Upload</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                     <th>Reset</th>
@@ -116,6 +118,14 @@
                         <label for="poster">Password</label>
                         {!! Form::text('password',null,['id'=>'password', 'class'=>'form-control', 'placeholder'=>'Enter Password', 'minlength' => '6']) !!}
                     </fieldset>
+                    <fieldset class="form-group floating-label-form-group">
+                        <label for="poster">Max Download</label>
+                        {!! Form::number('max_download_mbps',null,['id'=>'max_download_mbps', 'class'=>'form-control', 'placeholder'=>'Enter Max Download in Mbps', 'min' => '1', 'max' => env('MAX_DOWNLOAD','9999')]) !!}
+                    </fieldset>
+                    <fieldset class="form-group floating-label-form-group">
+                        <label for="poster">Max Upload</label>
+                        {!! Form::number('max_upload_mbps',null,['id'=>'max_upload_mbps', 'class'=>'form-control', 'placeholder'=>'Enter Max Upload in Mbps', 'min' => '1','max' => env('MAX_UPLOAD','9999')]) !!}
+                    </fieldset>
                 </div>
                 <div class="modal-footer">
                     <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="Close">
@@ -159,6 +169,14 @@
                     <fieldset class="form-group floating-label-form-group">
                         <label for="poster">Password</label>
                         {!! Form::text('password',null,['id'=>'password', 'class'=>'form-control', 'placeholder'=>'Enter Password', 'minlength' => '6']) !!}
+                    </fieldset>
+                    <fieldset class="form-group floating-label-form-group">
+                        <label for="poster">Max Download</label>
+                        {!! Form::number('max_download_mbps',null,['id'=>'max_download_mbps', 'class'=>'form-control', 'placeholder'=>'Enter Max Download in Mbps', 'min' => '1', 'max' => env('MAX_DOWNLOAD','9999')]) !!}
+                    </fieldset>
+                    <fieldset class="form-group floating-label-form-group">
+                        <label for="poster">Max Upload</label>
+                        {!! Form::number('max_upload_mbps',null,['id'=>'max_upload_mbps', 'class'=>'form-control', 'placeholder'=>'Enter Max Upload in Mbps', 'min' => '1','max' => env('MAX_UPLOAD','9999')]) !!}
                     </fieldset>
                 </div>
                 <div class="modal-footer">
@@ -463,12 +481,16 @@
             var name = $(this).data("name");
             var username = $(this).data("username");
             var email = $(this).data("email");
+            var max_upload_mbps = $(this).data("max_upload_mbps");
+            var max_download_mbps = $(this).data("max_download_mbps");
 
 
             $('#editform #apartment_id').val(apartment_id);
             $('#editform #name').val(name);
             $('#editform #email').val(email);
             $('#editform #username').val(username);
+            $('#editform #max_upload_mbps').val(max_upload_mbps);
+            $('#editform #max_download_mbps').val(max_download_mbps);
             $('#editform').attr('action', 'users/' + id);
             $('#editmodel').modal('show');
         });
@@ -486,6 +508,8 @@
                     {data: "email"},
                     {data: "password"},
                     {data: "apartment.name"},
+                    {data: "max_download_mbps"},
+                    {data: "max_upload_mbps"},
                     {data: "status", searchable: false, sortable: false},
                     {data: "action", searchable: false, sortable: false},
                     {data: "reset", searchable: false, sortable: false},

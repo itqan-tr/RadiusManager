@@ -47,6 +47,8 @@ class UserController extends Controller
             'email' => 'required|email|string|max:255',
             'username' => 'required|string|max:20|unique:users',
             'password' => 'required|string|max:255',
+            'max_upload_mbps' => 'required|numeric|min:1|max:' . env('MAX_UPLOAD', 9999),
+            'max_download_mbps' => 'required|numeric|min:1|max:' . env('MAX_UPLOAD', 9999),
         ]);
 
         $user = User::create($request->all());
@@ -65,6 +67,16 @@ class UserController extends Controller
         $user->radreplies()->create([
             'attribute' => 'Tunnel-Private-Group-Id',
             'value' => $user->apartment->vlan_id
+        ]);
+
+        $user->radreplies()->create([
+            'attribute' => 'WISPr-Bandwidth-Max-Up',
+            'value' => $request->max_upload_mbps * 1024
+        ]);
+
+        $user->radreplies()->create([
+            'attribute' => 'WISPr-Bandwidth-Max-Down',
+            'value' => $request->max_download_mbps * 1024
         ]);
 
         return response('success');
@@ -112,6 +124,8 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|string|max:255',
                 'username' => 'required|string|max:20',
+                'max_upload_mbps' => 'required|numeric|min:1|max:' . env('MAX_UPLOAD', 9999),
+                'max_download_mbps' => 'required|numeric|min:1|max:' . env('MAX_UPLOAD', 9999),
             ]);
         }
 
@@ -144,6 +158,28 @@ class UserController extends Controller
         } else {
             $user->radreplies()->where('attribute', 'Tunnel-Private-Group-Id')->first()->update([
                 'value' => $user->apartment->vlan_id
+            ]);
+        }
+
+        if (!$user->radreplies()->where('attribute', 'WISPr-Bandwidth-Max-Up')->first()) {
+            $user->radreplies()->create([
+                'attribute' => 'WISPr-Bandwidth-Max-Up',
+                'value' => $user->max_upload_mbps * 1024
+            ]);
+        } else {
+            $user->radreplies()->where('attribute', 'WISPr-Bandwidth-Max-Up')->first()->update([
+                'value' => $user->max_upload_mbps * 1024
+            ]);
+        }
+
+        if (!$user->radreplies()->where('attribute', 'WISPr-Bandwidth-Max-Down')->first()) {
+            $user->radreplies()->create([
+                'attribute' => 'WISPr-Bandwidth-Max-Down',
+                'value' => $user->max_download_mbps * 1024
+            ]);
+        } else {
+            $user->radreplies()->where('attribute', 'WISPr-Bandwidth-Max-Down')->first()->update([
+                'value' => $user->max_download_mbps * 1024
             ]);
         }
 
@@ -215,7 +251,7 @@ class UserController extends Controller
                 return '<button type="button" class="reset_pwd btn btn-sm btn-warning" data-user-id="' . $user->id . '" data-token="' . csrf_token() . '">Reset Password</button>';
             })
             ->addColumn('edit', function ($user) {
-                return '<button type="button" class="edit btn btn-sm btn-primary" data-email="' . $user->email . '" data-apartment-id="' . $user->apartment_id . '" data-name="' . $user->name . '" data-username="' . $user->username . '" data-id="' . $user->id . '">Edit</button>';
+                return '<button type="button" class="edit btn btn-sm btn-primary" data-max_upload_mbps="' . $user->max_upload_mbps . '" data-max_download_mbps="' . $user->max_download_mbps . '" data-email="' . $user->email . '" data-apartment-id="' . $user->apartment_id . '" data-name="' . $user->name . '" data-username="' . $user->username . '" data-id="' . $user->id . '">Edit</button>';
             })
             ->addColumn('delete', function ($user) {
                 return '<button type="button" class="delete btn btn-sm btn-danger" data-delete-id="' . $user->id . '" data-token="' . csrf_token() . '" >Delete</button>';

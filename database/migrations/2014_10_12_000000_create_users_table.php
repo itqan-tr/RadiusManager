@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('username', 20)->unique();
             $table->string('password');
             $table->string('default_password');
+            $table->integer('max_upload_mbps');
+            $table->integer('max_download_mbps');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
