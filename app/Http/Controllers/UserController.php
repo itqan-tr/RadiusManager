@@ -71,12 +71,12 @@ class UserController extends Controller
 
         $user->radreplies()->create([
             'attribute' => 'WISPr-Bandwidth-Max-Up',
-            'value' => $request->max_upload_mbps * 1024
+            'value' => $request->max_upload_mbps * 1024 * 1000
         ]);
 
         $user->radreplies()->create([
             'attribute' => 'WISPr-Bandwidth-Max-Down',
-            'value' => $request->max_download_mbps * 1024
+            'value' => $request->max_download_mbps * 1024 * 1000
         ]);
 
         return response('success');
@@ -164,22 +164,22 @@ class UserController extends Controller
         if (!$user->radreplies()->where('attribute', 'WISPr-Bandwidth-Max-Up')->first()) {
             $user->radreplies()->create([
                 'attribute' => 'WISPr-Bandwidth-Max-Up',
-                'value' => $user->max_upload_mbps * 1024
+                'value' => $user->max_upload_mbps * 1024 * 1000
             ]);
         } else {
             $user->radreplies()->where('attribute', 'WISPr-Bandwidth-Max-Up')->first()->update([
-                'value' => $user->max_upload_mbps * 1024
+                'value' => $user->max_upload_mbps * 1024 * 1000
             ]);
         }
 
         if (!$user->radreplies()->where('attribute', 'WISPr-Bandwidth-Max-Down')->first()) {
             $user->radreplies()->create([
                 'attribute' => 'WISPr-Bandwidth-Max-Down',
-                'value' => $user->max_download_mbps * 1024
+                'value' => $user->max_download_mbps * 1024 * 1000
             ]);
         } else {
             $user->radreplies()->where('attribute', 'WISPr-Bandwidth-Max-Down')->first()->update([
-                'value' => $user->max_download_mbps * 1024
+                'value' => $user->max_download_mbps * 1024 * 1000
             ]);
         }
 
