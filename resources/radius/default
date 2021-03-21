@@ -710,7 +710,7 @@ post-auth {
 
     #edited by mitul START
     if("%{reply:Packet-Type}" == "Access-Accept") {
-        if("%{sql:INSERT INTO mac_addresses (user_id, macaddress) VALUES ((SELECT id from users WHERE username = '%{User-Name}' LIMIT 1), '%{Called-Station-Id}')}"){
+        if("%{sql:INSERT INTO mac_addresses (user_id, macaddress) VALUES ((SELECT id from users WHERE username = '%{User-Name}' LIMIT 1), '%{Calling-Station-Id}')}"){
             ok
         }
     }
