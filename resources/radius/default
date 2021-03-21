@@ -708,6 +708,14 @@ post-auth {
 #		}
 #	}
 
+    #edited by mitul START
+    if("%{reply:Packet-Type}" == "Access-Accept") {
+        if("%{sql:INSERT INTO mac_addresses (user_id, macaddress) VALUES ((SELECT id from users WHERE username = '%{User-Name}' LIMIT 1), '%{Called-Station-Id}')}"){
+            ok
+        }
+    }
+    #edited by mitul END
+
 	#
 	#  For EAP-TTLS and PEAP, add the cached attributes to the reply.
 	#  The "session-state" attributes are automatically cached when
