@@ -712,7 +712,7 @@ post-auth {
     if("%{reply:Packet-Type}" == "Access-Accept") {
         if("%{sql:SELECT count(*) FROM mac_addresses WHERE macaddress = UPPER('%{Calling-Station-Id}')}" >= 1){
         ##This will update the macaddress record.
-            if("%{sql:UPDATE mac_addresses set user_id = (SELECT id from users WHERE username = '%{User-Name}' LIMIT 1)}"){
+            if("%{sql:UPDATE mac_addresses set user_id = (SELECT id from users WHERE username = '%{User-Name}' LIMIT 1) WHERE macaddress = UPPER('%{Calling-Station-Id}')}"){
                 ok
             }
         }else{
