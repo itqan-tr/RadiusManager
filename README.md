@@ -32,7 +32,7 @@ add-apt-repository -y ppa:ondrej/php
 
 apt-get update
 
-apt-get install -y php7.2 php7.2-fpm php-mysql php7.2-mysql php7.2-mbstring php-gettext php-doctrine-dbal php7.2-xml php7.2-zip
+apt-get install -y php7.2 php7.2-fpm php-mysql php7.2-mysql php7.2-mbstring php-gettext php-doctrine-dbal php7.2-xml php7.2-zip php7.2-curl
 
 sudo -- sh -c "echo 'cgi.fix_pathinfo=0' >> /etc/php/7.2/fpm/php.ini"
 
