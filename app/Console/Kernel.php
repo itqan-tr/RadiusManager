@@ -7,6 +7,7 @@ use App\Console\Commands\EntrataGetMistLeases;
 use App\Console\Commands\PostInstallNginx;
 use App\Console\Commands\PostInstallRadius;
 use App\Console\Commands\RadiusCleanUp;
+use App\Console\Commands\SendWelcomeEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -23,6 +24,7 @@ class Kernel extends ConsoleKernel
         RadiusCleanUp::class,
         EntrataGetCustomers::class,
         EntrataGetMistLeases::class,
+        SendWelcomeEmail::class,
     ];
 
     /**
@@ -36,7 +38,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('radius:cleanup')->daily();
         $schedule->command('entrata:getCustomers')->daily()->emailWrittenOutputTo(config('app.support.email'))
             ->then(function () {
-                $this->call('entrata:getMitsLeases')->emailWrittenOutputTo(config('app.support.email'));
+                $this->call('entrata:getMitsLeases')->emailWrittenOutputTo(config('app.support.email'))->then(function () {
+                    $this->call('email:welcome')->emailWrittenOutputTo(config('app.support.email'));
+                });
             });
     }
 
