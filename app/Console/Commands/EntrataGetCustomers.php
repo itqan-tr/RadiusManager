@@ -45,43 +45,45 @@ class EntrataGetCustomers extends Command
         $error_customer = [];
         $bar->start();
         foreach ($customers as $customer) {
-            if (isset($customer['Email'])) {
-                $lease_id = $customer['LeaseId']['Identification'][0]['IDValue'];
-                $apartment = Apartment::where('unit_number', '=', $customer['UnitNumber'])->first();
-                if (!$apartment) {
-                    $apartment = Apartment::where('name', '=', 'Apt' . $customer['UnitNumber'])->first();
-                    if ($apartment) {
+            if ($customer['LeaseId']['CustomerType'][0] == 'Primary') {
+                if (isset($customer['Email'])) {
+                    $lease_id = $customer['LeaseId']['Identification'][0]['IDValue'];
+                    $apartment = Apartment::where('unit_number', '=', $customer['UnitNumber'])->first();
+                    if (!$apartment) {
+                        $apartment = Apartment::where('name', '=', 'Apt' . $customer['UnitNumber'])->first();
+                        if ($apartment) {
+                            $apartment->unit_number = $customer['UnitNumber'];
+                            $apartment->save();
+                        }
+                    }
+                    if (!$apartment) {
+                        $apartment = new Apartment();
+                        $apartment->name = 'Apt' . $customer['UnitNumber'];
+                        $apartment->vlan_id = $customer['UnitNumber'];
                         $apartment->unit_number = $customer['UnitNumber'];
                         $apartment->save();
                     }
-                }
-                if (!$apartment) {
-                    $apartment = new Apartment();
-                    $apartment->name = 'Apt' . $customer['UnitNumber'];
-                    $apartment->vlan_id = $customer['UnitNumber'];
-                    $apartment->unit_number = $customer['UnitNumber'];
-                    $apartment->save();
-                }
-                $apartment_id = $apartment->id;
-                if ($user = User::where('email', '=', $customer['Email'])->first()) {
-                    $user->lease_id = $lease_id;
-                    $user->apartment_id = $apartment_id;
-                    $user->save();
+                    $apartment_id = $apartment->id;
+                    if ($user = User::where('email', '=', $customer['Email'])->first()) {
+                        $user->lease_id = $lease_id;
+                        $user->apartment_id = $apartment_id;
+                        $user->save();
+                    } else {
+                        $user = new User();
+                        $user->apartment_id = $apartment_id;
+                        $user->name = $customer['FirstName'] . ' ' . $customer['LastName'];
+                        $user->username = $customer['Email'];
+                        $user->password = str_random(6);
+                        $user->is_enabled = false;
+                        $user->default_password = $user->password;
+                        $user->email = $customer['Email'];
+                        $user->lease_id = $lease_id;
+                        $user->save();
+                    }
+                    $bar->advance();
                 } else {
-                    $user = new User();
-                    $user->apartment_id = $apartment_id;
-                    $user->name = $customer['FirstName'] . ' ' . $customer['LastName'];
-                    $user->username = $customer['Email'];
-                    $user->password = str_random(6);
-                    $user->is_enabled = false;
-                    $user->default_password = $user->password;
-                    $user->email = $customer['Email'];
-                    $user->lease_id = $lease_id;
-                    $user->save();
+                    $error_customer[] = $customer;
                 }
-                $bar->advance();
-            } else {
-                $error_customer[] = $customer;
             }
         }
         $bar->finish();
