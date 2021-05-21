@@ -44,6 +44,7 @@
                                     <th>Lease ID</th>
                                     <th>Lease Start Date</th>
                                     <th>Lease End Date</th>
+                                    <th>Email</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                     <th>Reset Mac</th>
@@ -362,7 +363,7 @@
                         closeModal: false,
                     },
                     confirm: {
-                        text: "Yes, delete it!",
+                        text: "Yes, reset it!",
                         value: true,
                         visible: true,
                         className: "",
@@ -396,6 +397,56 @@
                 });
         });
 
+        $(document).on('click', '.send_email', function () {
+
+            var user_id = $(this).data("user-id");
+            var token = $(this).data("token");
+
+            swal({
+                title: "Are you sure?",
+                text: "You want to send the welcome email to user.",
+                icon: "info",
+                buttons: {
+                    cancel: {
+                        text: "No, cancel it!",
+                        value: null,
+                        visible: true,
+                        className: "",
+                        closeModal: false,
+                    },
+                    confirm: {
+                        text: "Yes, send it!",
+                        value: true,
+                        visible: true,
+                        className: "",
+                        closeModal: false
+                    }
+                }
+            })
+                .then((isConfirm) => {
+                    if (isConfirm) {
+                        $.ajax(
+                            {
+                                url: "users/" + user_id + "/send_email",
+                                type: 'POST',
+                                data: {
+                                    "user_id": user_id,
+                                    "_method": 'POST',
+                                    "_token": token
+                                },
+                                success: function (result) {
+                                    swal("Success!", result, "success");
+                                },
+                                error: function (request, status, error) {
+                                    var val = request.responseText;
+                                    alert("error" + val);
+                                }
+                            });
+                    } else {
+                        swal("Cancelled", "Email not sent", "error");
+                    }
+                });
+        });
         /* Action Activate/De-Activate Record using AJAX Requres */
         $(document).on('click', '.action', function () {
 
@@ -492,6 +543,7 @@
                     {data: "lease_id"},
                     {data: "start_date"},
                     {data: "end_date"},
+                    {data: "send_email", searchable: false, sortable: false},
                     {data: "status", searchable: false, sortable: false},
                     {data: "action", searchable: false, sortable: false},
                     {data: "reset", searchable: false, sortable: false},

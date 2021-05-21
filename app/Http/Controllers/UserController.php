@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Apartment;
 use App\MacAddress;
+use App\Mail\WelcomeEmail;
 use App\User;
 use DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -190,6 +192,13 @@ class UserController extends Controller
         return response('Success');
     }
 
+    public function sendWelcomeEmail(Request $request)
+    {
+        $user = User::find($request->user_id);
+        Mail::to($user)->send(new WelcomeEmail($user));
+        return 'Welcome Email sent to ' . $user->email;
+    }
+
     public function getDataTable()
     {
         $users = User::with('apartment');
@@ -219,7 +228,10 @@ class UserController extends Controller
             ->addColumn('delete', function ($user) {
                 return '<button type="button" class="delete btn btn-sm btn-danger" data-delete-id="' . $user->id . '" data-token="' . csrf_token() . '" >Delete</button>';
             })
-            ->rawColumns(['status', 'action', 'reset', 'reset_pwd', 'edit', 'delete'])
+            ->addColumn('send_email', function ($user) {
+                return '<button type="button" class="send_email btn btn-sm btn-info" data-user-id="' . $user->id . '" data-token="' . csrf_token() . '" ><i class="la la-envelope"></i></button>';
+            })
+            ->rawColumns(['status', 'action', 'reset', 'reset_pwd', 'edit', 'delete', 'send_email'])
             ->make(true);
     }
 }
