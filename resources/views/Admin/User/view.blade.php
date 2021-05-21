@@ -46,7 +46,7 @@
                                     <th>Lease End Date</th>
                                     <th>Status</th>
                                     <th>Action</th>
-                                    <th>Reset</th>
+                                    <th>Reset Mac</th>
                                     <th>Reset</th>
                                     <th>Edit</th>
                                     <th>Delete</th>

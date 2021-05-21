@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ForgotPassword;
+use App\Mail\WelcomeEmail;
 use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class ForgotPasswordController extends Controller
 
         if ($user) {
             $response = Password::RESET_LINK_SENT;
-            Mail::to($user)->send(new ForgotPassword($user));
+            Mail::to($user)->send(new WelcomeEmail($user));
             return back()->with('status', trans($response));
         } else {
             $response = Password::INVALID_USER;

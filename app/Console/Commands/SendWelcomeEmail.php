@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Mail\ForgotPassword;
+use App\Mail\WelcomeEmail;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -50,7 +51,7 @@ class SendWelcomeEmail extends Command
         $users = User::whereDate('start_date', '=', Carbon::today()->addDays($days))->get();
         foreach ($users as $user) {
             $response = Password::RESET_LINK_SENT;
-            Mail::to($user)->send(new ForgotPassword($user));
+            Mail::to($user)->send(new WelcomeEmail($user));
             echo 'Welcome Email sent to ' . $user->email . PHP_EOL;
         }
     }

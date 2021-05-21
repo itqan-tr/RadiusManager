@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'property_name' => env('PROPERTY_NAME', 'Laravel'),
     'support' => [
         'email' => env('SUPPORT_EMAIL', null)
     ],
