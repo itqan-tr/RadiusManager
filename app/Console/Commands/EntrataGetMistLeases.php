@@ -40,7 +40,7 @@ class EntrataGetMistLeases extends Command
      */
     public function handle()
     {
-        $leases = Leases::getMitsLeases();
+        $leases = Leases::getMitsLeases(null, null);
         $bar = $this->output->createProgressBar(count($leases));
         $bar->start();
         foreach ($leases as $lease) {
