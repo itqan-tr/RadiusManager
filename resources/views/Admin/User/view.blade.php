@@ -41,6 +41,9 @@
                                     <th>Email</th>
                                     <th>Password</th>
                                     <th>Apartment</th>
+                                    <th>Lease ID</th>
+                                    <th>Lease Start Date</th>
+                                    <th>Lease End Date</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                     <th>Reset</th>
@@ -486,6 +489,9 @@
                     {data: "email"},
                     {data: "password"},
                     {data: "apartment.name"},
+                    {data: "lease_id"},
+                    {data: "start_date"},
+                    {data: "end_date"},
                     {data: "status", searchable: false, sortable: false},
                     {data: "action", searchable: false, sortable: false},
                     {data: "reset", searchable: false, sortable: false},
