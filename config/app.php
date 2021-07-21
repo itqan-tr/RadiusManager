@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'property_name' => env('PROPERTY_NAME', 'Laravel'),
+    'psk_password' => env('PSK_PASSWORD', 'password'),
     'support' => [
         'email' => env('SUPPORT_EMAIL', null)
     ],
