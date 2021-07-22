@@ -1,6 +1,6 @@
 # Radius Manager
 
-Mitul Gadhiya | Prakash Gujarati
+Mitul Gadhiya
 
 (c) JAYNATH INFOTECH
 
@@ -117,9 +117,35 @@ service nginx restart
 
 # Radius Clean up script
 
-php artisan radius:cleanup
+`php artisan radius:cleanup`
 
-Setup Laravel cron to run every min this will run Radius Cleanup daily midnight and this will clean the logs older then 90 days. 
+This will clean the radius database
+
+# Entrata Get Customers script
+
+`php artisan entrata:getCustomers`
+
+Retrieves list of customers for property.
+
+# Entrata Get MitsLeases script
+
+`php artisan entrata:getMitsLeases`
+
+This will fetch Lease information and update the expiration date for all the customers in the database. 
+
+# Entrata Get MitsLeases script
+
+`php artisan email:welcome {days=7}`
+
+Send welcome email to Customers {days} before the start date. Default = 7.  
+
+# Setup Laravel cron to run every min this will run following Task(s)
+
+1. Radius Cleanup daily midnight at 00:00 and this will clean the logs older than 90 days.
+2. Entrata Get Customers daily midnight at 00:00
+    1. It will then run Entrata Get MIT Lease
+        1. It will then send the welcome email to customers with start date after 7 days.
+        1. Send output to support email. 
 
 `* * * * * nginx php /var/www/html/RadiusManager/artisan schedule:run`
 
