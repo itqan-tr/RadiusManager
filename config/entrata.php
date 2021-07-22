@@ -39,4 +39,8 @@ return [
     'property' => [
         'id' => env('ENTRATA_PROPERTY_ID', null),
     ],
+
+    'cron' => [
+        'time' => env('ENTRATA_CRON_TIME', '00:00'),
+    ]
 ];

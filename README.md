@@ -142,7 +142,7 @@ Send welcome email to Customers {days} before the start date. Default = 7.
 # Setup Laravel cron to run every min this will run following Task(s)
 
 1. Radius Cleanup daily midnight at 00:00 and this will clean the logs older than 90 days.
-2. Entrata Get Customers daily midnight at 00:00
+2. Entrata Get Customers daily midnight at ENTRATA_CRON_TIME in .env file default 00:00
     1. It will then run Entrata Get MIT Lease
         1. It will then send the welcome email to customers with start date after 7 days.
         1. Send output to support email. 
