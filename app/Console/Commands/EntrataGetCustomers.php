@@ -68,6 +68,32 @@ class EntrataGetCustomers extends Command
                         $user->lease_id = $lease_id;
                         $user->apartment_id = $apartment_id;
                         $user->save();
+
+                        //Update RadReplies after user is updated.
+                        if (!$user->radreplies()->where('attribute', 'Tunnel-Type')->first()) {
+                            $user->radreplies()->create([
+                                'attribute' => 'Tunnel-Type',
+                                'value' => '13'
+                            ]);
+                        }
+
+                        if (!$user->radreplies()->where('attribute', 'Tunnel-Medium-Type')->first()) {
+                            $user->radreplies()->create([
+                                'attribute' => 'Tunnel-Medium-Type',
+                                'value' => '6'
+                            ]);
+                        }
+
+                        if (!$user->radreplies()->where('attribute', 'Tunnel-Private-Group-Id')->first()) {
+                            $user->radreplies()->create([
+                                'attribute' => 'Tunnel-Private-Group-Id',
+                                'value' => $user->apartment->vlan_id
+                            ]);
+                        } else {
+                            $user->radreplies()->where('attribute', 'Tunnel-Private-Group-Id')->first()->update([
+                                'value' => $user->apartment->vlan_id
+                            ]);
+                        }
                     } else {
                         $user = new User();
                         $user->apartment_id = $apartment_id;
@@ -79,7 +105,23 @@ class EntrataGetCustomers extends Command
                         $user->email = $customer['Email'];
                         $user->lease_id = $lease_id;
                         $user->save();
+
+                        //Add RadReplies after user is created.
+                        $user->radreplies()->create([
+                            'attribute' => 'Tunnel-Type',
+                            'value' => '13'
+                        ]);
+                        $user->radreplies()->create([
+                            'attribute' => 'Tunnel-Medium-Type',
+                            'value' => '6'
+                        ]);
+
+                        $user->radreplies()->create([
+                            'attribute' => 'Tunnel-Private-Group-Id',
+                            'value' => $user->apartment->vlan_id
+                        ]);
                     }
+
                     $bar->advance();
                 } else {
                     $error_customer[] = $customer;
