@@ -121,5 +121,11 @@ php artisan radius:cleanup
 
 Setup Laravel cron to run every min this will run Radius Cleanup daily midnight and this will clean the logs older then 90 days. 
 
+`crontab -e`
+
+If this prompt for Text Editor select/type 1. nano
+
+Copy following line into the editor at the end of the file. 
+
 `* * * * * nginx php /var/www/html/RadiusManager/artisan schedule:run`
 
