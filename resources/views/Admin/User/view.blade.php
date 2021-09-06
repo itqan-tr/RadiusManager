@@ -35,20 +35,26 @@
                             <table class="table table-responsive table-striped table-bordered dynamic-table"
                                    width="100%">
                                 <thead>
+                                <tr class="text-center">
+                                    <th rowspan="2">Name</th>
+                                    <th rowspan="2">Username</th>
+                                    <th rowspan="2">Email</th>
+                                    <th rowspan="2">Password</th>
+                                    <th rowspan="2">Apartment</th>
+                                    <th colspan="3">Lease</th>
+                                    <th rowspan="2">Create Date</th>
+                                    <th rowspan="2">Email</th>
+                                    <th rowspan="2">Status</th>
+                                    <th colspan="2">Reset</th>
+                                    <th colspan="3">Action</th>
+                                </tr>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
+                                    <th>ID</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Macaddress</th>
                                     <th>Password</th>
-                                    <th>Apartment</th>
-                                    <th>Lease ID</th>
-                                    <th>Lease Start Date</th>
-                                    <th>Lease End Date</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
                                     <th>Action</th>
-                                    <th>Reset Mac</th>
-                                    <th>Reset</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -543,11 +549,12 @@
                     {data: "lease_id"},
                     {data: "start_date"},
                     {data: "end_date"},
+                    {data: "created_at"},
                     {data: "send_email", searchable: false, sortable: false},
                     {data: "status", searchable: false, sortable: false},
-                    {data: "action", searchable: false, sortable: false},
                     {data: "reset", searchable: false, sortable: false},
                     {data: "reset_pwd", searchable: false, sortable: false},
+                    {data: "action", searchable: false, sortable: false},
                     {data: "edit", searchable: false, sortable: false},
                     {data: "delete", searchable: false, sortable: false}
                 ]

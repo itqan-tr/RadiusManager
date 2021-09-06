@@ -212,21 +212,21 @@ class UserController extends Controller
             })
             ->addColumn('action', function ($user) {
                 if ($user->is_enabled) {
-                    return '<button type="button" class="action btn btn-sm btn-danger" data-token="' . csrf_token() . '" data-id="' . $user->id . '" data-enabled="' . $user->is_enabled . '">De-Activate</button>';
+                    return '<button type="button" class="action btn btn-sm btn-danger" data-token="' . csrf_token() . '" data-id="' . $user->id . '" data-enabled="' . $user->is_enabled . '"><i class="la la-power-off"></button>';
                 }
-                return '<button type="button" class="action btn btn-sm btn-success" data-token="' . csrf_token() . '" data-id="' . $user->id . '" data-enabled="' . $user->is_enabled . '">Activate</button>';
+                return '<button type="button" class="action btn btn-sm btn-success" data-token="' . csrf_token() . '" data-id="' . $user->id . '" data-enabled="' . $user->is_enabled . '"><i class="la la-play"></i></button>';
             })
             ->addColumn('reset', function ($user) {
-                return '<button type="button" class="reset btn btn-sm btn-warning" data-user-id="' . $user->id . '" data-token="' . csrf_token() . '">Reset Mac Address</button>';
+                return '<button type="button" class="reset btn btn-sm btn-warning" data-user-id="' . $user->id . '" data-token="' . csrf_token() . '">Reset</button>';
             })
             ->addColumn('reset_pwd', function ($user) {
-                return '<button type="button" class="reset_pwd btn btn-sm btn-warning" data-user-id="' . $user->id . '" data-token="' . csrf_token() . '">Reset Password</button>';
+                return '<button type="button" class="reset_pwd btn btn-sm btn-warning" data-user-id="' . $user->id . '" data-token="' . csrf_token() . '">Reset</button>';
             })
             ->addColumn('edit', function ($user) {
-                return '<button type="button" class="edit btn btn-sm btn-primary" data-email="' . $user->email . '" data-apartment-id="' . $user->apartment_id . '" data-name="' . $user->name . '" data-username="' . $user->username . '" data-id="' . $user->id . '">Edit</button>';
+                return '<button type="button" class="edit btn btn-sm btn-primary" data-email="' . $user->email . '" data-apartment-id="' . $user->apartment_id . '" data-name="' . $user->name . '" data-username="' . $user->username . '" data-id="' . $user->id . '"><i class="la la-edit"></i></button>';
             })
             ->addColumn('delete', function ($user) {
-                return '<button type="button" class="delete btn btn-sm btn-danger" data-delete-id="' . $user->id . '" data-token="' . csrf_token() . '" >Delete</button>';
+                return '<button type="button" class="delete btn btn-sm btn-danger" data-delete-id="' . $user->id . '" data-token="' . csrf_token() . '" ><i class="la la-trash"></i></button>';
             })
             ->addColumn('send_email', function ($user) {
                 return '<button type="button" class="send_email btn btn-sm btn-info" data-user-id="' . $user->id . '" data-token="' . csrf_token() . '" ><i class="la la-envelope"></i></button>';
