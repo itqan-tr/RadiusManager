@@ -36,7 +36,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('radius:cleanup')->daily();
-        $schedule->command('entrata:getCustomers')->dailyAt(config('entrata.cron.time'))->emailWrittenOutputTo(config('app.support.email'))
+        $schedule->command('entrata:getCustomers')->hourly()->emailWrittenOutputTo(config('app.support.email'))
             ->then(function () {
                 $this->call('entrata:getMitsLeases')->emailWrittenOutputTo(config('app.support.email'))->then(function () {
                     $this->call('email:welcome')->emailWrittenOutputTo(config('app.support.email'));

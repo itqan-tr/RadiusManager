@@ -17,7 +17,7 @@ class SendWelcomeEmail extends Command
      *
      * @var string
      */
-    protected $signature = 'email:welcome {days=7}';
+    protected $signature = 'email:welcome {days=0}';
 
     /**
      * The console command description.
@@ -46,13 +46,19 @@ class SendWelcomeEmail extends Command
         if ($this->hasArgument('days')) {
             $days = (int)$this->argument('days');
         } else {
-            $days = 7;
+            $days = 0;
         }
-        $users = User::whereDate('start_date', '=', Carbon::today()->addDays($days))->get();
+        $users = User::whereDate('start_date', '=', Carbon::today()->addDays($days))
+            ->where(function ($query) use ($days) {
+                $query->where('last_emailed_at', '<', Carbon::now()->subHours(24))->orWhereNull('last_emailed_at');
+            })
+            ->get();
+
         foreach ($users as $user) {
-            $response = Password::RESET_LINK_SENT;
             Mail::to($user)->send(new WelcomeEmail($user));
             echo 'Welcome Email sent to ' . $user->email . PHP_EOL;
+            $user->last_emailed_at = Carbon::now();
+            $user->save();
         }
     }
 }
