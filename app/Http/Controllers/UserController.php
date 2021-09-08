@@ -6,6 +6,7 @@ use App\Apartment;
 use App\MacAddress;
 use App\Mail\WelcomeEmail;
 use App\User;
+use Artisan;
 use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -190,6 +191,13 @@ class UserController extends Controller
         }
 
         return response('Success');
+    }
+
+    public function syncAll(Request $request)
+    {
+        Artisan::call('entrata:getCustomers');
+        Artisan::call('entrata:getMitsLeases');
+        Artisan::call('email:welcome');
     }
 
     public function sendWelcomeEmail(Request $request)

@@ -15,17 +15,21 @@
 
     <!-- Main -->
     <section id="main">
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Users</h4>
-                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
-                            <button type="button" class="btn btn-outline-warning block btn-lg" data-toggle="modal"
+                            <button type="button" class="btn btn-outline-danger" id="reset_all_users">
+                                <i class="la la-close"></i> Reset All Users
+                            </button>
+                            <button type="button" class="btn btn-outline-success" id="sync_users">
+                                <i class="la la-refresh"></i> Sync Customers
+                            </button>
+                            <button type="button" class="btn btn-outline-warning" data-toggle="modal"
                                     data-target="#addmodel">
-                                Add
+                                <i class="la la-plus"></i> Add
                             </button>
                         </div>
                     </div>
@@ -42,6 +46,7 @@
                                     <th rowspan="2">Password</th>
                                     <th rowspan="2">Apartment</th>
                                     <th colspan="3">Lease</th>
+                                    <th rowspan="2">Last Email Date</th>
                                     <th rowspan="2">Create Date</th>
                                     <th rowspan="2">Email</th>
                                     <th rowspan="2">Status</th>
@@ -60,30 +65,6 @@
                                 </tr>
                                 </thead>
                             </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="main">
-
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Reset Users</h4>
-                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-
-                    </div>
-                    <div class="card-content collpase show">
-                        <div class="card-body card-dashboard">
-                            <div class="heading-elements">
-                                <button type="button" class="btn btn-outline-danger btn-lg" id="reset_all_users">
-                                    Reset All Users
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -241,6 +222,51 @@
                             });
                     } else {
                         swal("Cancelled", "Your records are safe", "error");
+                    }
+                });
+        });
+
+        /* Rest All Users Record using AJAX Requres */
+        $(document).on('click', '#sync_users', function () {
+            swal({
+                title: "Are you sure?",
+                text: "",
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "No, cancel it!",
+                        visible: true,
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "Yes, sync all!",
+                        className: "btn-success",
+                        closeModal: false
+                    }
+                }
+            })
+                .then((isConfirm) => {
+                    if (isConfirm) {
+                        $.ajax(
+                            {
+                                url: "users/syncall",
+                                type: 'GET',
+                                success: function (result) {
+                                    const el = document.createElement('div')
+                                    el.className = 'text-left';
+                                    el.innerHTML = "<pre>" + result + "</pre>";
+                                    swal({
+                                        title: "Success",
+                                        content: el,
+                                        icon: "success",
+                                    })
+                                    mytable.draw();
+                                },
+                                error: function (request, status, error) {
+                                    var val = request.responseText;
+                                    alert("error" + val);
+                                }
+                            });
                     }
                 });
         });
@@ -549,6 +575,7 @@
                     {data: "lease_id"},
                     {data: "start_date"},
                     {data: "end_date"},
+                    {data: "last_emailed_at"},
                     {data: "created_at"},
                     {data: "send_email", searchable: false, sortable: false},
                     {data: "status", searchable: false, sortable: false},
