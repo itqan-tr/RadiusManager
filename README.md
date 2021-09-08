@@ -135,9 +135,9 @@ This will fetch Lease information and update the expiration date for all the cus
 
 # Entrata Get MitsLeases script
 
-`php artisan email:welcome {days=7}`
+`php artisan email:welcome {days=0}`
 
-Send welcome email to Customers {days} before the start date. Default = 7.  
+Send welcome email to Customers {days} before the start date. Default = 0 (Today).
 
 # Setup Laravel cron to run every min
 
