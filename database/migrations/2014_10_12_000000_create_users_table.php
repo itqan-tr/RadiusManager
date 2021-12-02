@@ -15,16 +15,18 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->bigInteger('entrata_id')->index();
             $table->unsignedInteger('apartment_id')->references('id')->on('apartments');
             $table->boolean('is_enabled')->default(true);
             $table->string('name');
             $table->string('email')->nullable();
-            $table->string('username')->unique();
+            $table->string('username')->unique()->index();
             $table->string('password');
             $table->string('default_password');
             $table->string('lease_id')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
+            $table->dateTime('last_emailed_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

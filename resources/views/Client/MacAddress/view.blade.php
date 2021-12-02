@@ -37,6 +37,7 @@
                             <table class="table table-striped table-bordered dynamic-table" width="100%">
                                 <thead>
                                 <tr>
+                                    <th>Device Name</th>
                                     <th>MAC Address</th>
                                     <th>Delete</th>
                                 </tr>
@@ -64,6 +65,11 @@
                 <form action="macaddress" method="post" id="addform">
                     @csrf
                     <div class="modal-body">
+                        <fieldset class="form-group floating-label-form-group">
+                            <label for="admindevicename">Device Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="Enter Device Name">
+                        </fieldset>
                         <fieldset class="form-group floating-label-form-group">
                             <label for="macaddress">MAC Address</label>
                             <input type="text" class="form-control" id="macaddress" name="macaddress"
@@ -168,6 +174,7 @@
                 "ajax": "{{ url('macaddress/getDataTable') }}",
 
                 columns: [
+                    {data: "name"},
                     {data: "macaddress"},
                     {data: "delete"}
                 ]

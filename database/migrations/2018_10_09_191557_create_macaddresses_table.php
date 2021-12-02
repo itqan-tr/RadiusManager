@@ -16,6 +16,7 @@ class CreateMacaddressesTable extends Migration
         Schema::create('mac_addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->references('id')->on('users');
+            $table->string('name');
             $table->string('macaddress');
             $table->boolean('is_permanent')->default(false);
             $table->timestamps();

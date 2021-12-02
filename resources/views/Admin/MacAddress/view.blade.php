@@ -37,6 +37,7 @@
                                 <thead>
                                 <tr>
                                     <th>User</th>
+                                    <th>Device Name</th>
                                     <th>MAC Address</th>
                                     <th width="50px">Permanent</th>
                                     <th>Delete</th>
@@ -68,6 +69,11 @@
                         <fieldset class="form-group floating-label-form-group">
                             <label for="title">User</label>
                             {!!Form::select('user_id', $users, null, ['id'=>'user_id', 'class' => 'form-control', 'required'=>'true'])!!}
+                        </fieldset>
+                        <fieldset class="form-group floating-label-form-group">
+                            <label for="admindevicename">Device Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="Enter Device Name">
                         </fieldset>
                         <fieldset class="form-group floating-label-form-group">
                             <label for="adminmacaddress">MAC Address</label>
@@ -225,6 +231,7 @@
 
                 columns: [
                     {data: "user.name"},
+                    {data: "name"},
                     {data: "macaddress"},
                     {data: "is_permanent"},
                     {data: "delete"}

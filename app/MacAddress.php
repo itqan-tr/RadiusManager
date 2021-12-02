@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class MacAddress extends Model
 {
     protected $fillable = [
-        'user_id', 'macaddress','is_permanent'
+        'user_id', 'name', 'macaddress', 'is_permanent'
     ];
 
     public function user()
     {
-       return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
 }

@@ -43,6 +43,7 @@ class EntrataGetMistLeases extends Command
         $leases = Leases::getMitsLeases(null, null);
         $bar = $this->output->createProgressBar(count($leases));
         $bar->start();
+        \DB::table('users')->update(['is_enabled' => false]);
         foreach ($leases as $lease) {
             $bar->advance();
             $start_date = null;
@@ -59,29 +60,29 @@ class EntrataGetMistLeases extends Command
                     $end_date = $leaseEvent['@attributes']['Date'];
                 }
             }
+            if ($lease['Status'][0]['ApprovalStatus'] == 'Current' || $lease['Status'][0]['ApprovalStatus'] == 'Notice') {
+                $is_enabled = true;
+            } else {
+                $is_enabled = false;
+            }
+
             \DB::table('users')
                 ->where('lease_id', '=', $lease_id)
-                ->update(['start_date' => $start_date, 'end_date' => $end_date]);
+                ->update(['is_enabled' => $is_enabled, 'start_date' => $start_date, 'end_date' => $end_date]);
         }
         $bar->finish();
 
         // Activate Users
-        $activated_users = \DB::table('users')
-            ->where('start_date', '<=', Carbon::today()->toDateString())
-            ->where('end_date', '>=', Carbon::today()->toDateString())
-            ->update(['is_enabled' => '1', 'updated_at' => Carbon::now()]);
+        $active_users = User::where('is_enabled', '=', true)
+            ->count();
 
         // De-Activate Usersz
-        $deactivated_users = \DB::table('users')
-            ->where('start_date', '>', Carbon::today()->toDateString())
-            ->orWhere('end_date', '<', Carbon::today()->toDateString())
-            ->orWhereNull('start_date')
-            ->orWhereNull('end_date')
-            ->update(['is_enabled' => '0', 'updated_at' => Carbon::now()]);
+        $inactive_users = User::where('is_enabled', '=', false)
+            ->count();
 
         echo PHP_EOL;
         echo User::all()->count() . " Total Users as of " . Carbon::today()->toDateString() . PHP_EOL;
-        echo "$activated_users Users Activated as of " . Carbon::today()->toDateString() . PHP_EOL;
-        echo "$deactivated_users Users De-Activated " . Carbon::today()->toDateString() . PHP_EOL;
+        echo "$active_users Users active as of " . Carbon::today()->toDateString() . PHP_EOL;
+        echo "$inactive_users Users inactive " . Carbon::today()->toDateString() . PHP_EOL;
     }
 }

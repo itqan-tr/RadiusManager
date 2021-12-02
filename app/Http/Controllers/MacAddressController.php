@@ -38,6 +38,7 @@ class MacAddressController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'name' => 'required|string',
             'macaddress' => 'required|string|unique:mac_addresses|regex:/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/',
         ], [
             'macaddress.regex' => 'The MAC address format is invalid.'
@@ -81,6 +82,7 @@ class MacAddressController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'name' => 'required|string',
             'macaddress' => 'required|string|unique:mac_addresses|regex:/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/',
         ], [
             'macaddress.regex' => 'The MAC address format is invalid.'

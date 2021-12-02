@@ -48,6 +48,7 @@ class EntrataGetCustomers extends Command
             if ($customer['LeaseId']['CustomerType'][0] == 'Primary') {
                 if (isset($customer['Email'])) {
                     $lease_id = $customer['LeaseId']['Identification'][0]['IDValue'];
+                    $entrata_id = $customer['@attributes']['Id'];
                     $apartment = Apartment::where('unit_number', '=', $customer['UnitNumber'])->first();
                     if (!$apartment) {
                         $apartment = Apartment::where('name', '=', 'Apt' . $customer['UnitNumber'])->first();
@@ -64,7 +65,9 @@ class EntrataGetCustomers extends Command
                         $apartment->save();
                     }
                     $apartment_id = $apartment->id;
-                    if ($user = User::where('email', '=', $customer['Email'])->first()) {
+                    if ($user = User::where('entrata_id', '=', $entrata_id)->first()) {
+                        $user->username = $customer['Email'];
+                        $user->email = $customer['Email'];
                         $user->lease_id = $lease_id;
                         $user->apartment_id = $apartment_id;
                         $user->save();
@@ -96,6 +99,7 @@ class EntrataGetCustomers extends Command
                         }
                     } else {
                         $user = new User();
+                        $user->entrata_id = $entrata_id;
                         $user->apartment_id = $apartment_id;
                         $user->name = $customer['FirstName'] . ' ' . $customer['LastName'];
                         $user->username = $customer['Email'];
