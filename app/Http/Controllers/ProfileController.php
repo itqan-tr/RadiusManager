@@ -78,11 +78,22 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'current_password' => 'required|string|min:6',
             'password' => 'required|string|min:6',
+            'password_confirm' => 'required|string|min:6|same:password',
         ]);
-
-        User::findOrFail($id)->update($request->all());
-        return redirect()->action('ProfileController@index');
+        if (Auth::user()->password == $request->get('current_password')) {
+            User::findOrFail($id)->update($request->all());
+            return redirect()->action('ProfileController@index');
+        } else {
+            $response = [
+                'message' => 'The given data was invalid.',
+                'errors' => [
+                    'current_password' => 'The current password you have entered is incorrect'
+                ]
+            ];
+            return response($response, 422);
+        }
     }
 
     /**

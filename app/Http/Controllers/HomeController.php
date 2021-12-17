@@ -25,12 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::guard('web')->check())
-        {
+        if (Auth::guard('web')->check()) {
+            if (Auth::user()->password == Auth::user()->default_password) {
+                return redirect('profile');
+            }
             return redirect('macaddress');
         }
-        if (Auth::guard('admin')->check())
-        {
+        if (Auth::guard('admin')->check()) {
             return redirect('admin');
         }
         return redirect('login');

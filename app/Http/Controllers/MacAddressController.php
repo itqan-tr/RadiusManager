@@ -16,6 +16,9 @@ class MacAddressController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->password == Auth::user()->default_password) {
+            return redirect('profile');
+        }
         return view('Client.MacAddress.view');
     }
 

@@ -37,9 +37,21 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-2 label-control" for="password">Password</label>
+                                    <label class="col-md-2 label-control" for="password">Current Password</label>
                                     <div class="col-md-10">
-                                        {!! Form::text('password',null,['class'=>'form-control','required'=>'true','data-minlenght' => 6]) !!}
+                                        {!! Form::password('current_password',['class'=>'form-control','required'=>'true','data-minlenght' => 6]) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="password">New Password</label>
+                                    <div class="col-md-10">
+                                        {!! Form::password('password',['id'=>'password','class'=>'form-control','required'=>'true','data-minlenght' => 6]) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-2 label-control" for="password">Repeat Password</label>
+                                    <div class="col-md-10">
+                                        {!! Form::password('password_confirm',['class'=>'form-control','required'=>'true','data-rule-equalTo'=>'#password','data-minlenght' => 6]) !!}
                                     </div>
                                 </div>
                             </div>
@@ -98,6 +110,7 @@
                         data: $(form).serialize(),
                         success: function (data) {
                             swal("Good job!", "Your Record Updated Successfully", "success");
+                            window.location.href = '/';
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             var response = JSON.parse(XMLHttpRequest.responseText);
