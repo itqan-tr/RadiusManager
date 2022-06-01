@@ -158,8 +158,8 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
+        MacAddress::where('user_id', '=', $request->id)->delete();
         User::destroy($request->id);
-
         return response('Success');
     }
 
