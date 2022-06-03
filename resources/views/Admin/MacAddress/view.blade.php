@@ -19,14 +19,13 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">MAC Address</h4>
-                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                        <div class="heading-elements" style="width: 200px;">
-                            <button type="button" data-token="{{ csrf_token() }}" class="reset btn btn-danger block btn-lg pull-left" style="width: 90px">
+                        <div class="heading-elements">
+                            <button type="button" data-token="{{ csrf_token() }}" class="reset btn btn-outline-danger">
                                 Reset
                             </button>
-                            <button type="button" class="btn btn-outline-warning block btn-lg pull-right" style="width: 90px" data-toggle="modal"
+                            <button type="button" class="btn btn-outline-warning" data-toggle="modal"
                                     data-target="#addmodel">
-                                Add
+                                 Add
                             </button>
                         </div>
                     </div>

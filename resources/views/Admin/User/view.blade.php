@@ -23,7 +23,7 @@
                         <h4 class="card-title">Users</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
-                            <button type="button" class="btn btn-outline-warning block btn-lg" data-toggle="modal"
+                            <button type="button" class="btn btn-outline-warning" data-toggle="modal"
                                     data-target="#addmodel">
                                 Add
                             </button>

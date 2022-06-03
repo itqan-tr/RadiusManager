@@ -23,7 +23,7 @@
                         <h4 class="card-title">PSK</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
-                            <button type="button" class="btn btn-outline-warning block btn-lg" data-toggle="modal" onclick="document.location.href='psk/download';"
+                            <button type="button" class="btn btn-outline-warning" data-toggle="modal" onclick="document.location.href='psk/download';"
                                     data-target="#addmodel">Download Captive Portal Files</button>
                         </div>
                     </div>

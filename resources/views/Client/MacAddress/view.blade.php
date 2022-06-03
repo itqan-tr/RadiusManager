@@ -25,7 +25,7 @@
                                 here !</a></h5>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
-                            <button type="button" class="btn btn-outline-warning block btn-lg" id="register"
+                            <button type="button" class="btn btn-outline-warning" id="register"
                                     data-toggle="modal"
                                     data-target="#addmodel">
                                 Register Device
